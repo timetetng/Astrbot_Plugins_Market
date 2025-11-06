@@ -1,52 +1,62 @@
 :root {
-  /* 主色调 - 钢蓝色系 */
-  --primary-color: #4682b4;
-  --primary-hover: #5a9bd4;
-  --primary-active: #336699;
-  --primary-light: rgba(70, 130, 180, 0.1);
+  /* 主色调 - 清新淡绿色系 */
+  --primary-color: #10b981;
+  --primary-hover: #34d399;
+  --primary-active: #059669;
+  --primary-light: rgba(16, 185, 129, 0.12);
 
-  /* 背景色 - 增加层次感 */
-  --bg-base: #fafbfc;
-  --bg-card: #ffffff;
-  --bg-hover: #f0f4f8;
-  --bg-n-tag: #e0f2fe;
-  --bg-header: #b3d4fc;
+  /* 渐变色系 */
+  --gradient-primary: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+  --gradient-secondary: linear-gradient(120deg, #34d399 0%, #10b981 100%);
+  --gradient-card: linear-gradient(145deg, rgba(240, 253, 244, 0.98) 0%, rgba(240, 253, 244, 0.95) 100%);
+
+  /* 背景色 - 增强对比度和玻璃质感 */
+  --bg-base: #e5e7eb;
+  --bg-card: rgba(240, 253, 244, 0.85);
+  --bg-card-hover: rgba(240, 253, 244, 0.95);
+  --bg-hover: rgba(16, 185, 129, 0.08);
+  --bg-n-tag: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --bg-header: linear-gradient(135deg, #10b981 0%, #059669 100%);
 
   /* 文本颜色 - 提升对比度 */
   --text-primary: #0f172a;
   --text-secondary: #475569;
   --text-tertiary: #64748b;
   --text-tag: #ffffff;
-  --text-n-tag: #0277bd;
+  --text-n-tag: #ffffff;
   --pagination-text: #000;
-  --success-color: var(--primary-color);
+  --success-color: #10b981;
 
   /* 边框颜色 */
-  --border-base: #e2e8f0;
-  --border-hover: #4682b4;
+  --border-base: rgba(148, 163, 184, 0.3);
+  --border-hover: #10b981;
 
-  /* 阴影 - 更自然的阴影效果 */
-  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  /* 阴影 - 绿色主题 */
+  --shadow-sm: 0 1px 3px 0 rgba(16, 185, 129, 0.1), 0 1px 2px -1px rgba(16, 185, 129, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(16, 185, 129, 0.15), 0 2px 4px -2px rgba(16, 185, 129, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(16, 185, 129, 0.2), 0 4px 6px -4px rgba(16, 185, 129, 0.15);
+  --shadow-xl: 0 20px 25px -5px rgba(16, 185, 129, 0.25), 0 8px 10px -6px rgba(16, 185, 129, 0.2);
+  --shadow-glow: 0 0 30px rgba(16, 185, 129, 0.3);
 
-  /* Header专用CSS变量 - 钢蓝色渐变 */
-  --header-gradient: linear-gradient(135deg, #4682b4 0%, #2c5aa0 50%, #1e3a8a 100%);
-  --header-overlay: radial-gradient(circle at top right, rgba(255,255,255,0.1), transparent);
-  --header-text-color: rgba(255, 255, 255, 0.95);
-  --header-text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  --search-bg: rgba(255, 255, 255, 0.15);
-  --input-bg: rgba(255, 255, 255, 0.2);
-  --input-bg-hover: rgba(255, 255, 255, 0.25);
-  --input-bg-focus: rgba(255, 255, 255, 0.3);
-  --input-text: rgba(255, 255, 255, 0.95);
-  --input-placeholder: rgba(255, 255, 255, 0.7);
-  --input-border: rgba(255, 255, 255, 0.2);
-  --input-border-hover: rgba(255, 255, 255, 0.3);
-  --input-border-focus: rgba(255, 255, 255, 0.4);
-  
-  /* Sticky Header */
-  --sticky-bg: rgba(255, 255, 255, 0.6);
+  /* Header专用CSS变量 - 清新绿色渐变 */
+  --header-gradient: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+  --header-gradient-animated: linear-gradient(-45deg, #10b981, #059669, #047857, #34d399);
+  --header-overlay: radial-gradient(circle at top right, rgba(255,255,255,0.15), transparent);
+  --header-text-color: rgba(255, 255, 255, 0.98);
+  --header-text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --search-bg: rgba(255, 255, 255, 0.18);
+  --input-bg: rgba(255, 255, 255, 0.22);
+  --input-bg-hover: rgba(255, 255, 255, 0.28);
+  --input-bg-focus: rgba(255, 255, 255, 0.35);
+  --input-text: rgba(255, 255, 255, 0.98);
+  --input-placeholder: rgba(255, 255, 255, 0.75);
+  --input-border: rgba(255, 255, 255, 0.25);
+  --input-border-hover: rgba(255, 255, 255, 0.4);
+  --input-border-focus: rgba(255, 255, 255, 0.6);
+
+  /* Sticky Header - 玻璃拟态效果 */
+  --sticky-bg: rgba(255, 255, 255, 0.75);
+  --sticky-backdrop: blur(16px) saturate(180%);
   
   /* 下拉菜单变量 */
   --dropdown-bg: #ffffff;
@@ -106,51 +116,61 @@
 
 /* 暗色主题 */
 .dark {
-  /* 主色调 - 暗色模式下的钢蓝色 */
-  --primary-color: #5a9bd4;
-  --primary-hover: #7bb3e0;
-  --primary-active: #4682b4;
-  --primary-light: rgba(90, 155, 212, 0.15);
+  /* 主色调 - 暗色模式下的渐变色 */
+  --primary-color: #a78bfa;
+  --primary-hover: #c4b5fd;
+  --primary-active: #8b5cf6;
+  --primary-light: rgba(167, 139, 250, 0.15);
+
+  /* 渐变色系 - 暗色 */
+  --gradient-primary: linear-gradient(135deg, #a78bfa 0%, #60a5fa 50%, #06b6d4 100%);
+  --gradient-secondary: linear-gradient(120deg, #c4b5fd 0%, #93c5fd 100%);
+  --gradient-card: linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.9) 100%);
 
   /* 背景色 - 现代暗色背景 */
   --bg-base: #0f172a;
-  --bg-card: #1e293b;
-  --bg-hover: #334155;
-  --bg-n-tag: #0c4a6e;
+  --bg-card: rgba(15, 23, 42, 0.8);
+  --bg-card-hover: rgba(30, 41, 59, 0.9);
+  --bg-hover: rgba(167, 139, 250, 0.12);
+  --bg-n-tag: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
 
   /* 文本颜色 - 暗色模式下的高对比度 */
   --text-primary: #f8fafc;
   --text-secondary: #cbd5e1;
   --text-tertiary: #94a3b8;
-  --text-n-tag: #38bdf8;
+  --text-n-tag: #ffffff;
   --pagination-text: #fff;
 
   /* 边框颜色 */
-  --border-base: #334155;
-  --border-hover: #5a9bd4;
+  --border-base: rgba(71, 85, 105, 0.4);
+  --border-hover: #a78bfa;
 
-  /* 阴影 - 暗色模式下的阴影 */
-  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px -1px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
+  /* 阴影 - 暗色模式下的发光效果 */
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px -1px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6), 0 4px 6px -4px rgba(0, 0, 0, 0.6);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.7), 0 8px 10px -6px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 40px rgba(167, 139, 250, 0.4);
 
-  /* Header专用CSS变量 - 暗色模式钢蓝渐变 */
-  --header-gradient: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #1e293b 100%);
-  --header-overlay: radial-gradient(circle at top right, rgba(90, 155, 212, 0.1), transparent);
-  --header-text-color: rgba(255, 255, 255, 0.95);
-  --header-text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-  --search-bg: rgba(0, 0, 0, 0.3);
-  --input-bg: rgba(0, 0, 0, 0.4);
-  --input-bg-hover: rgba(0, 0, 0, 0.5);
-  --input-bg-focus: rgba(0, 0, 0, 0.6);
-  --input-text: rgba(255, 255, 255, 0.95);
-  --input-placeholder: rgba(255, 255, 255, 0.6);
-  --input-border: rgba(255, 255, 255, 0.15);
-  --input-border-hover: rgba(255, 255, 255, 0.25);
-  --input-border-focus: rgba(90, 155, 212, 0.5);
-  
-  /* Sticky Header */
-  --sticky-bg: rgba(30, 41, 59, 0.6);
+  /* Header专用CSS变量 - 暗色模式现代渐变 */
+  --header-gradient: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #6d28d9 100%);
+  --header-gradient-animated: linear-gradient(-45deg, #1e1b4b, #312e81, #6d28d9, #3b82f6);
+  --header-overlay: radial-gradient(circle at top right, rgba(167, 139, 250, 0.15), transparent);
+  --header-text-color: rgba(255, 255, 255, 0.98);
+  --header-text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+  --search-bg: rgba(0, 0, 0, 0.35);
+  --input-bg: rgba(0, 0, 0, 0.45);
+  --input-bg-hover: rgba(0, 0, 0, 0.55);
+  --input-bg-focus: rgba(0, 0, 0, 0.65);
+  --input-text: rgba(255, 255, 255, 0.98);
+  --input-placeholder: rgba(255, 255, 255, 0.7);
+  --input-border: rgba(255, 255, 255, 0.18);
+  --input-border-hover: rgba(255, 255, 255, 0.35);
+  --input-border-focus: rgba(167, 139, 250, 0.6);
+
+  /* Sticky Header - 暗色玻璃拟态 */
+  --sticky-bg: rgba(15, 23, 42, 0.8);
+  --sticky-backdrop: blur(16px) saturate(180%);
   
   /* 下拉菜单变量 */
   --dropdown-bg: #1e293b;

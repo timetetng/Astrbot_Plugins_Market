@@ -60,9 +60,18 @@ body {
 
 .app-container {
   min-height: 100vh;
-  background: var(--body-color, #f5f5f5);
+  background: var(--bg-base);
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(16, 185, 129, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
   display: flex;
   flex-direction: column;
+}
+
+:global(.dark) .app-container {
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(16, 185, 129, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.12) 0%, transparent 50%);
 }
 
 .main-layout {

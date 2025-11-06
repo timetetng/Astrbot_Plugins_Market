@@ -13,39 +13,51 @@
     ref="cardRef"
   >
     <template #header>
-      <div 
-        class="card-header" 
-        role="banner" 
+      <div
+        class="card-header"
+        role="banner"
         aria-labelledby="plugin-header-content"
       >
-        <div 
-          id="plugin-header-content"
-          class="plugin-name-container" 
-          ref="nameContainer" 
-          role="heading" 
-          aria-level="2"
-          aria-label="插件卡片标题区域"
-        >
-          <h3 
-            class="plugin-name" 
-            :class="{ 'marquee': isTextOverflow }"
-            ref="pluginNameEl"
+        <div class="plugin-header-left">
+          <div class="plugin-logo-container" v-if="plugin.logo">
+            <img
+              :src="plugin.logo"
+              :alt="`${plugin.name} 的logo`"
+              class="plugin-logo"
+              @error="handleLogoError"
+              loading="lazy"
+              decoding="async"
+            >
+          </div>
+          <div
+            id="plugin-header-content"
+            class="plugin-name-container"
+            ref="nameContainer"
             role="heading"
-            aria-level="3"
-            :aria-label="plugin.name"
-            :aria-description="`插件：${plugin.name}，版本 ${plugin.version}`"
+            aria-level="2"
+            aria-label="插件卡片标题区域"
           >
-            <span 
-              class="plugin-name-text" 
-              ref="nameTextEl"
-              :aria-hidden="isTextOverflow"
-            >{{ plugin.name }}</span>
-          </h3>
+            <h3
+              class="plugin-name"
+              :class="{ 'marquee': isTextOverflow }"
+              ref="pluginNameEl"
+              role="heading"
+              aria-level="3"
+              :aria-label="plugin.name"
+              :aria-description="`插件：${plugin.name}，版本 ${plugin.version}`"
+            >
+              <span
+                class="plugin-name-text"
+                ref="nameTextEl"
+                :aria-hidden="isTextOverflow"
+              >{{ plugin.name }}</span>
+            </h3>
+          </div>
         </div>
-        <n-tag 
-          type="success" 
-          size="small" 
-          :bordered="false" 
+        <n-tag
+          type="success"
+          size="small"
+          :bordered="false"
           class="version-tag"
           role="text"
           :aria-label="`版本号：${plugin.version.startsWith('v') ? plugin.version : 'v' + plugin.version}`"
@@ -97,6 +109,9 @@
             aria-haspopup="true"
             aria-expanded="false"
           >
+            <n-icon size="16" style="margin-right: 6px" aria-hidden="true">
+              <LogoGithub />
+            </n-icon>
             查看仓库
           </n-button>
           <div class="icon-buttons" role="group" aria-label="快捷操作按钮组">
@@ -167,7 +182,7 @@ import {
   useMessage,
   NTooltip
 } from 'naive-ui'
-import { StarSharp, LinkOutline, PersonOutline, CheckmarkOutline } from '@vicons/ionicons5'
+import { StarSharp, LinkOutline, PersonOutline, CheckmarkOutline, LogoGithub } from '@vicons/ionicons5'
 import { defineAsyncComponent } from 'vue'
 const PluginDetails = defineAsyncComponent(() => import('./PluginDetails.vue'))
 
@@ -271,7 +286,7 @@ const copyRepoUrl = async (e) => {
 }
 
 const openUrl = (url, e) => {
-  e?.stopPropagation() 
+  e?.stopPropagation()
   if (url) {
     window.open(url, '_blank')
   }
@@ -280,17 +295,32 @@ const openUrl = (url, e) => {
 const showDetails = () => {
   showPluginDetails.value = true
 }
+
+const handleLogoError = (event) => {
+  // 隐藏加载失败的logo
+  event.target.style.display = 'none'
+}
 </script>
 
 <style scoped>
 @keyframes cardAppear {
   0% {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px) scale(0.95);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 悬浮时的光效 */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
   }
 }
 
@@ -298,34 +328,138 @@ const showDetails = () => {
   position: relative;
   overflow: visible;
   contain: content;
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-  border: 3px solid var(--border-base);
-  box-shadow: var(--shadow-sm);
-  background-color: var(--bg-card);
-  min-height: 180px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 1px solid var(--border-base);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.12);
+  min-height: 200px;
   max-height: max-content;
   display: flex;
   flex-direction: column;
   min-width: 100%;
-  animation: cardAppear 0.5s cubic-bezier(0.23, 1, 0.32, 1) backwards;
-  animation-delay: calc(0.4s + (var(--card-index, 0) * 0.08s));
+  border-radius: 8px;
+  animation: cardAppear 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  animation-delay: calc(0.2s + (var(--card-index, 0) * 0.05s));
+}
+
+:deep(.n-card) {
+  height: 100%;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+}
+
+:deep(.n-card) {
+  --n-color: rgba(240, 253, 244, 0.85) !important;
+  --n-color-modal: rgba(240, 253, 244, 0.85) !important;
+  --n-color-popover: rgba(240, 253, 244, 0.85) !important;
+  --n-color-hover: rgba(240, 253, 244, 0.95) !important;
+  --n-color-embedded: rgba(240, 253, 244, 0.85) !important;
+  --n-color-embedded-modal: rgba(240, 253, 244, 0.85) !important;
+  --n-color-embedded-popover: rgba(240, 253, 244, 0.85) !important;
+}
+
+:deep(.n-card .n-card-header) {
+  background: transparent !important;
+}
+
+:deep(.n-card .n-card__content) {
+  background: transparent !important;
+}
+
+:deep(.n-card-header) {
+  background: transparent;
+  border-bottom: 1px solid var(--border-base);
+}
+
+:deep(.n-card__content) {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+}
+
+.plugin-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(59, 130, 246, 0.05));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.plugin-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(16, 185, 129, 0.4);
+  border-radius: 8px 8px 0 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
 .plugin-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   border-color: var(--border-hover);
-  box-shadow: var(--shadow-md);
+  box-shadow:
+    0 2px 8px rgba(16, 185, 129, 0.15),
+    0 8px 24px rgba(16, 185, 129, 0.2);
+  background: var(--bg-card-hover);
+}
+
+.plugin-card:hover::before {
+  opacity: 0.6;
+}
+
+.plugin-card:hover::after {
+  opacity: 1;
 }
 
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 16px;
+  padding: 14px 16px 14px 6px;
   border-bottom: 1px solid var(--border-base);
+  border-radius: 8px 8px 0 0;
+  min-height: 48px;
+}
+
+.plugin-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.plugin-logo-container {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: var(--bg-card);
-  border-radius: 15px 15px 0 0;
-  min-height: 44px;
+  border: 1px solid var(--border-base);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.plugin-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 :deep(.n-card__header) {
@@ -426,7 +560,12 @@ const showDetails = () => {
   .plugin-name-container {
     max-width: 65%;
   }
-  
+
+  .plugin-logo-container {
+    width: 32px;
+    height: 32px;
+  }
+
   .card-header h3 {
     font-size: 1.1em;
   }
@@ -472,14 +611,7 @@ const showDetails = () => {
 }
 
 .tags-container::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 28px;
-  height: 100%;
-  background: linear-gradient(to right, rgba(0,0,0,0), var(--bg-card));
-  pointer-events: none;
+  display: none;
 }
 
 .tags-space {
@@ -492,18 +624,40 @@ const showDetails = () => {
 .plugin-tag {
   transition: all 0.2s ease;
   margin-bottom: 2px;
-  background-color: var(--primary-color) !important;
+  background: linear-gradient(135deg, #10b981 0%, #34d399 100%) !important;
   color: var(--text-tag) !important;
   border: none !important;
-  padding: 2px 8px !important;
+  padding: 4px 10px !important;
   display: inline-flex;
   align-items: center;
   flex: 0 0 auto;
+  border-radius: 4px;
+  font-weight: 500;
+  box-shadow: 0 1px 2px rgba(16, 185, 129, 0.15);
+  backdrop-filter: blur(6px) saturate(160%);
+  -webkit-backdrop-filter: blur(6px) saturate(160%);
 }
 
 .plugin-tag:hover {
-  transform: scale(1.05);
-  opacity: 0.9;
+  transform: translateY(-1px);
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
+  opacity: 1;
+}
+
+/* 暗色主题标签样式 */
+.dark .plugin-tag {
+  background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%) !important;
+  color: var(--text-tag) !important;
+  border: none !important;
+  box-shadow: 0 1px 2px rgba(139, 92, 246, 0.25);
+  backdrop-filter: blur(6px) saturate(180%);
+  -webkit-backdrop-filter: blur(6px) saturate(180%);
+}
+
+.dark .plugin-tag:hover {
+  background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%) !important;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
 }
 
 .plugin-meta {
@@ -553,33 +707,63 @@ const showDetails = () => {
 }
 
 .button-group :deep(.main-button) {
-  border-radius: 8px;
-  height: 28px;
-  padding: 0 12px;
+  border-radius: 6px;
+  height: 32px;
+  padding: 0 16px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: linear-gradient(135deg, #10b981 0%, #34d399 100%) !important;
+  color: white !important;
+  border: none !important;
+  font-weight: 500;
+  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.2);
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px) saturate(180%);
+  -webkit-backdrop-filter: blur(8px) saturate(180%);
+}
+
+.button-group :deep(.main-button:hover) {
+  transform: translateY(-1px);
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+/* 暗色主题按钮样式 */
+.dark .button-group :deep(.main-button) {
+  background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%) !important;
+  color: white !important;
+  box-shadow: 0 1px 3px rgba(139, 92, 246, 0.3);
+  backdrop-filter: blur(8px) saturate(180%);
+  -webkit-backdrop-filter: blur(8px) saturate(180%);
+}
+
+.dark .button-group :deep(.main-button:hover) {
+  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%) !important;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
 }
 
 .icon-buttons :deep(.n-button) {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--text-secondary);
-  background-color: var(--bg-hover);
+  background: var(--bg-card);
   border: 1px solid var(--border-base);
   transition: all 0.2s ease;
-  border-radius: 8px;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 .icon-buttons :deep(.n-button:hover) {
   color: var(--primary-color);
-  border-color: transparent;
-  background-color: var(--primary-light);
-  transform: translateY(-1px);
+  border-color: var(--primary-color);
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
 }
 
 @media (max-width: 480px) {

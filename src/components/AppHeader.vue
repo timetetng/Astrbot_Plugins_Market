@@ -300,16 +300,32 @@ onUnmounted(() => {
 
 .app-header {
   text-align: center;
-  margin-bottom: 40px;
-  padding: 32px 20px;
-  background: var(--header-gradient);
-  border-radius: 0 0 32px 32px;
+  margin-bottom: 48px;
+  padding: 36px 20px;
+  background: var(--header-gradient-animated);
+  background-size: 400% 400%;
+  border-radius: 0 0 16px 16px;
   position: relative;
   overflow: hidden;
-  animation: header-slide-down 0.6s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+  animation:
+    header-slide-down 0.6s cubic-bezier(0.33, 1, 0.68, 1) forwards,
+    gradient-shift 15s ease infinite;
   transform-origin: top;
-  will-change: transform, clip-path;
+  will-change: transform, clip-path, background-position;
   contain: paint layout;
+}
+
+/* 渐变动画 */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .app-header::before {
@@ -338,9 +354,10 @@ onUnmounted(() => {
 .floating-circle {
   position: absolute;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
   backdrop-filter: blur(10px);
   opacity: 0;
+  box-shadow: 0 8px 32px rgba(16, 185, 129, 0.2);
 }
 
 .circle-1 {
@@ -499,9 +516,9 @@ onUnmounted(() => {
 /* 平板和手机通用样式 (最大 768px) */
 @media (max-width: 768px) {
   .app-header {
-    margin-bottom: 24px;
-    padding: 20px 16px;
-    border-radius: 0 0 24px 24px;
+    margin-bottom: 32px;
+    padding: 24px 16px;
+    border-radius: 0 0 12px 12px;
   }
 
   .search-container {
@@ -532,9 +549,9 @@ onUnmounted(() => {
 /* 仅手机设备 */
 @media (max-width: 480px) {
   .app-header {
-    margin-bottom: 24px;
-    padding: 20px 16px;
-    border-radius: 0 0 24px 24px;
+    margin-bottom: 28px;
+    padding: 22px 16px;
+    border-radius: 0 0 12px 12px;
   }
   
   .header-title {
@@ -715,7 +732,8 @@ onUnmounted(() => {
 }
 
 :global(.dark) .floating-circle {
-  background: rgba(90, 155, 212, 0.1);
+  background: linear-gradient(135deg, rgba(167, 139, 250, 0.2), rgba(167, 139, 250, 0.05));
+  box-shadow: 0 8px 32px rgba(167, 139, 250, 0.3);
 }
 
 /* ===== Sticky Header 样式 ===== */
@@ -727,13 +745,13 @@ onUnmounted(() => {
   z-index: 1000;
   transform: translateY(-100%);
   opacity: 0;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
-  backdrop-filter: blur(28px) saturate(140%);
-  -webkit-backdrop-filter: blur(28px) saturate(140%) !important;
+  backdrop-filter: var(--sticky-backdrop);
+  -webkit-backdrop-filter: var(--sticky-backdrop) !important;
   background: var(--sticky-bg);
-  border-bottom: 2px solid var(--border-base);
-  box-shadow: none;
+  border-bottom: 1px solid var(--border-base);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   box-sizing: border-box;
 }
 

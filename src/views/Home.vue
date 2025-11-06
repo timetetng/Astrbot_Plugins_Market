@@ -18,6 +18,9 @@
       />
     </div>
 
+    <!-- Tag分类栏 -->
+    <tag-category-bar />
+
     <!-- 随机排序时的工具条 -->
     <div v-if="sortBy === 'random'" class="grid-toolbar">
       <div class="grid-toolbar-inner">
@@ -91,6 +94,7 @@ import AppHeader from '../components/AppHeader.vue'
 import PluginCard from '../components/PluginCard.vue'
 import AppPagination from '../components/AppPagination.vue'
 import AppFooter from '../components/AppFooter.vue'
+import TagCategoryBar from '../components/TagCategoryBar.vue'
 import { usePluginStore } from '../stores/plugins'
 
 const store = usePluginStore()
@@ -154,14 +158,14 @@ onMounted(() => {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
     max-width: 1400px;
-    gap: 24px;
-    padding: 20px;
+    gap: 36px;
+    padding: 24px;
     margin: 0 auto;
     animation: gridAppear 0.3s ease-out;
     animation-delay: 0.7s;
     animation-fill-mode: backwards;
-    align-content: start;  
-    align-items: start;   
+    align-content: start;
+    align-items: start;
   }
 
 @keyframes gridAppear {
@@ -177,8 +181,8 @@ onMounted(() => {
 @media (max-width: 1024px) and (min-width: 769px) {
   .plugins-grid {
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 20px;
-    padding: 18px;
+    gap: 32px;
+    padding: 22px;
   }
 }
 
@@ -186,8 +190,8 @@ onMounted(() => {
 @media (max-width: 768px) and (min-width: 481px) {
   .plugins-grid {
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 18px;
-    padding: 16px;
+    gap: 28px;
+    padding: 20px;
   }
 }
 
@@ -195,8 +199,8 @@ onMounted(() => {
 @media (max-width: 480px) {
   .plugins-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
-    padding: 16px;
+    gap: 24px;
+    padding: 20px;
   }
 }
 
@@ -223,16 +227,17 @@ onMounted(() => {
 
 .loading-dots {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   align-items: center;
 }
 
 .dot {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  background: var(--primary-color);
+  background: var(--gradient-primary);
   animation: dotPulse 1.4s ease-in-out infinite both;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
 }
 
 .dot:nth-child(1) {
