@@ -68,7 +68,7 @@ const handleTagClick = (tag) => {
   position: sticky;
   top: 72px;
   z-index: 100;
-  background: linear-gradient(to bottom, var(--bg-base), var(--bg-base) 80%, transparent);
+  background: transparent;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
