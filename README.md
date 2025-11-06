@@ -1,4 +1,10 @@
-# [AstrBot Plugin Marketplace](https://plugins.astrbot.app/)
+# [AstrBot Plugin Marketplace](https://plugins.lsgbin.com/)
+
+**THE ORIGIN SITE GOT SOMETHING WRONG THAT HAD A 404 ERROR**
+
+That is why this repo forked here.
+
+And I make a little update, enjoy it -> https://plugins.lsgbin.com
 
 A simple AstrBot plugin marketplace page for showcasing plugins for the AstrBot framework.
 
