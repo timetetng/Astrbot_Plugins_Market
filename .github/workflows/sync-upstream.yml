@@ -24,7 +24,7 @@ jobs:
     - name: Fetch upstream
       run: |
         git fetch upstream
-        git fetch --unshallow  # 确保获取完整的提交历史
+        # 移除 --unshallow 命令，因为完整仓库不需要
 
     - name: Check if upstream has changes
       id: check
